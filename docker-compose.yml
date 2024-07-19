@@ -42,7 +42,7 @@ services:
       SPARK_MASTER_URL: spark://spark-master:7077
 
   postgres:
-    image: latest
+    image: postgres:14.0
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
