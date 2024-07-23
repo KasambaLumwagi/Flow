@@ -9,7 +9,7 @@ dag = DAG(
         "owner": "Kasamba Lumwagi",
         "start_date": airflow.utils.dates.days_ago(1)
     },
-    schedule_interval = "@daily"
+    schedule = "@daily"
 )
 
 start = PythonOperator(
