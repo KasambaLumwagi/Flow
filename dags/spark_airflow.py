@@ -21,7 +21,7 @@ start = PythonOperator(
 python_job = SparkSubmitOperator(
     task_id="python_job",
     conn_id="spark-conn",
-    application="/opt/bitnami/spark/jobs/python/wordcountjob.py",
+    application="jobs/python/wordcountjob.py",
     name="arrow-spark",
     conf={
         "spark.master": "spark://spark-master:7077",
