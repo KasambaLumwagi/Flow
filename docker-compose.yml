@@ -44,9 +44,9 @@ services:
   postgres:
     image: postgres:14.0
     environment:
-      - POSTGRES_USER=airflow
-      - POSTGRES_PASSWORD=airflow
-      - POSTGRES_DB=airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
     networks:
       - xamba
 
@@ -60,7 +60,18 @@ services:
 
   scheduler:
     <<: *airflow-common
-    command: bash -c "airflow db init && airflow users create --username admin --firstname Kasamba --lastname Lumwagi --role Admin --email kasambalumwagi@gmail.com --password admin && airflow scheduler"
+    command: >
+      bash -c "
+      airflow db init &&
+      airflow db upgrade &&
+      airflow users create --username admin --firstname Kasamba --lastname Lumwagi --role Admin --email kasambalumwagi@gmail.com --password admin ||
+      echo "database already initialized"
+      airflow webserver"
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      - scheduler
 
 networks:
   xamba:
