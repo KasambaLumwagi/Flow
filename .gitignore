@@ -1,4 +1,4 @@
 .idea
-venv
+myenv
 logs
 __pycache__
